@@ -1,0 +1,789 @@
+{
+	"name": "source_prep_pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "CopyGitData_CRM_CustInfo",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "cst_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cst_id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "cst_key",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cst_key",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "cst_firstname",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cst_firstname",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "cst_lastname",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cst_lastname",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "cst_marital_status",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cst_marital_status",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "cst_gndr",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cst_gndr",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "cst_create_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "cst_create_date",
+									"type": "Date",
+									"physicalType": "date"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_crm_cust_info",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_location": "source_crm/cust_info.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_sqlDB",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_name": "crm_cust_info"
+						}
+					}
+				]
+			},
+			{
+				"name": "CopyGitData_CRM_PrdInfo",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "CopyGitData_CRM_CustInfo",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "prd_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "prd_id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "prd_key",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "prd_key",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "prd_nm",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "prd_nm",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "prd_cost",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "prd_cost",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "prd_line",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "prd_line",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "prd_start_dt",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "prd_start_dt",
+									"type": "Date",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "prd_end_dt",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "prd_end_dt",
+									"type": "Date",
+									"physicalType": "date"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_crm_cust_info",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_location": "source_crm/prd_info.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_sqlDB",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_name": "crm_prd_info"
+						}
+					}
+				]
+			},
+			{
+				"name": "CopyGitData_CRM_SalesDetails",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "CopyGitData_CRM_PrdInfo",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "sls_ord_num",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sls_ord_num",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "sls_prd_key",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sls_prd_key",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "sls_cust_id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sls_cust_id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "sls_order_dt",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sls_order_dt",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "sls_ship_dt",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sls_ship_dt",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "sls_due_dt",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sls_due_dt",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "sls_sales",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sls_sales",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "sls_quantity",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sls_quantity",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "sls_price",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "sls_price",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_crm_cust_info",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_location": "source_crm/sales_details.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_sqlDB",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_name": "crm_sales_details"
+						}
+					}
+				]
+			},
+			{
+				"name": "CopyGitData_ERP_CUST_AZ12",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "CopyGitData_CRM_SalesDetails",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CID",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BDATE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BDATE",
+									"type": "Date",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "GEN",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GEN",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_crm_cust_info",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_location": "source_erp/CUST_AZ12.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_sqlDB",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_name": "erp_CUST_AZ12"
+						}
+					}
+				]
+			},
+			{
+				"name": "CopyGitData_ERP_LOC_A101",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "CopyGitData_ERP_CUST_AZ12",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CID",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CNTRY",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CNTRY",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_crm_cust_info",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_location": "source_erp/LOC_A101.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_sqlDB",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_name": "erp_LOC_A101"
+						}
+					}
+				]
+			},
+			{
+				"name": "CopyGitData_ERP_PX_CAT_G1V2",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "CopyGitData_ERP_LOC_A101",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ID",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CAT",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CAT",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SUBCAT",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SUBCAT",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MAINTENANCE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MAINTENANCE",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_crm_cust_info",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_location": "source_erp/PX_CAT_G1V2.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_sqlDB",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_name": "erp_PX_CAT_G1V2"
+						}
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-10-13T09:19:54Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

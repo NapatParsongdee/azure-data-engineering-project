@@ -1,0 +1,15 @@
+{
+	"name": "adf-store-napat",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "canadacentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "32fbe325-58a3-4096-a986-1e924c7e5bb7",
+		"tenantId": "c2bb85dd-7d99-4002-a46b-eb7358619cc8"
+	}
+}

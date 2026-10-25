@@ -1,0 +1,31 @@
+{
+	"name": "ds_crm_cust_info",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Is_github",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"table_location": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "NapatParsongdee/databricks_bootcamp_2026/refs/heads/main/bike_lakehouse_2026/datasets/@{dataset().table_location}",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
