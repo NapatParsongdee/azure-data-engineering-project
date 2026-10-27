@@ -1,3 +1,3 @@
-# End-to-End Azure Data Engineering Real-Time Project
+# Azure-Data-Engineering-Project
 
 ## 📌 Project Overview
