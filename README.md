@@ -5,7 +5,7 @@ This project focuses on building a comprehensive data engineering pipeline using
 
 I will use unclean datasets from [DataWithBaraa's Databricks Bootcamp 2026](https://github.com/DataWithBaraa/databricks_bootcamp_2026/tree/main/datasets/engineering) to better demonstrate the data cleaning and transformation process.
   
-![image](Picture/picture1.png)
+![image](Picture/data_flow_diagram.png)
 
 ---
 
@@ -96,7 +96,7 @@ azure-data-engineering-project/
 ## 🚀 How to Run This Project
 
 ### Prerequisites
-![image](Picture/picture2.png)
+![image](Picture/resource_group.png)
 * Azure Subscription
 * SQL Server & SQL database (on-premise or VM)
 * Azure Data Factory 
