@@ -100,8 +100,6 @@ azure-data-engineering-project/
 * Azure Data Factory
 * Azure Databricks Workspace
 * Azure Data Lake Storage Gen2
-* Azure Synapse Analytics
-* Power BI Desktop
 
 ### Steps
 
@@ -109,8 +107,6 @@ azure-data-engineering-project/
 2. Configure Linked Services in ADF
 3. Run ADF pipelines
 4. Execute Databricks notebooks (Bronze → Silver → Gold)
-5. Create Synapse tables
-6. Connect Power BI to Synapse
 
 ---
 
