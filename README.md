@@ -97,6 +97,8 @@ azure-data-engineering-project/
 * Azure Databricks Workspace & Access Connector for Azure Databricks
 * Azure Data Lake Storage Gen2
 
+---
+
 ### Steps
 
 1. Create Azure resources
@@ -104,4 +106,10 @@ azure-data-engineering-project/
 3. Run ADF pipelines
 4. Execute Databricks notebooks (Bronze → Silver → Gold)
 
+---
+
+## 👤 Author
+
+**Napat Prasongdee**
+Aspiring Data Engineer
 
