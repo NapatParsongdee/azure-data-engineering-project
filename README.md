@@ -32,30 +32,25 @@ This project follows the **Medallion Architecture**:
 ```
 azure-data-engineering-project/
 │
-├── adf/
-│   ├── pipelines/
-│   ├── datasets/
-│   └── linkedService/
+├── AzureDataFactory/
+│   ├── dataset/
+│   ├── factory/
+│   ├── linkedService/
+│   ├── pipeline/
+│   └── publish_config.json
 │
-├── databricks/
-│   ├── bronze to silver transformations.py
-│   ├── silver to gold transformations.py
-│   └── storagemount.py
+├── AzureDatabricks/
+│   ├── gold_layer/
+│   ├── silver_layer/
+│   └── db_notebook.ipynb
 │
-├── synapse/
-│   ├── sql-scripts/
-|   ├── pipelines/
-│   ├── datasets/
-│   └── linkedService/
-│
-├── powerbi/
-│   └── Dashboard 1.pbix
-│
-├── screenshots/
-│   ├── ADF Pipeline.png/
-|   ├── Dashboard 1.png/
-│   ├── Resource group.png/
-│   └── Synapse pipeline.png/
+├── Picture/
+│   ├── data_flow_diagram.png
+│   ├── data_mart.png
+│   ├── increm_data_pipeline.png
+│   ├── integration_model.png
+│   ├── resource_group.png
+│   └── source_prep_pipeline.png
 │
 └── README.md
 ```
