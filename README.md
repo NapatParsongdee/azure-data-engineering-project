@@ -16,7 +16,6 @@ I will use unclean datasets from [DataWithBaraa's Databricks Bootcamp 2026](http
 - **Delta Lake & Delta Tables:** Provides efficient and reliable data storage.
 - **Medallion Architecture:** Structures data pipelines into Bronze, Silver, and Gold layers.
 - **Dimensional Data Modeling in Azure Databricks:** Designs and optimizes data warehouses.
-- **Slowly Changing Dimensions (SCD):** Implements historical data tracking in Databricks.
 
 ---
 
