@@ -69,7 +69,7 @@ azure-data-engineering-project/
 
 * Extracts data from github
 * Uses Copy Activity
-* Loads raw data into **Bronze layer** in ADLS Gen2
+* Loads raw data into a SQL database (for better data inspection), then ingests it into the Bronze Layer in ADLS Gen2.
 
 ### 2️⃣ Bronze Layer
 
