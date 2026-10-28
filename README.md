@@ -108,14 +108,6 @@ azure-data-engineering-project/
 3. Run ADF pipelines
 4. Execute Databricks notebooks (Bronze → Silver → Gold)
 
----
-
-## 📸 Screenshots 
-
-* ADF pipeline execution
-* Synapse pipeline execution
-* Power BI dashboard
-* Resource group
 
 (Added images inside a `/screenshots` folder)
 
