@@ -74,7 +74,7 @@ azure-data-engineering-project/
 ### 2️⃣ Bronze Layer
 
 * Raw, unprocessed data
-* Stored in original schema
+* Stored in Bronze Layer ADLS Gen2
 
 ### 3️⃣ Silver Layer (Databricks) 
 (Note: The examples below illustrate some of the data transformation steps performed in the Silver Layer. Due to unclean datasets, there are too many transformations to list here.)
@@ -82,23 +82,25 @@ azure-data-engineering-project/
 * Schema enforcement
 * Data type corrections
 * Deduplication
+* Stored in Silver Layer ADLS Gen2
 
 ### 4️⃣ Gold Layer (Databricks)
 
 * Business-level aggregations
 * Analytical-ready datasets
 * Optimized for reporting
+* Stored in Gold Layer ADLS Gen2 and Databricks Gold catalog (for initial load and incremental load)
 
 ---
 
 ## 🚀 How to Run This Project
 
 ### Prerequisites
-
+![image](Picture/picture2.png)
 * Azure Subscription
-* SQL Server (on-premise or VM)
-* Azure Data Factory
-* Azure Databricks Workspace
+* SQL Server & SQL database (on-premise or VM)
+* Azure Data Factory 
+* Azure Databricks Workspace & Access Connector for Azure Databricks
 * Azure Data Lake Storage Gen2
 
 ### Steps
@@ -107,9 +109,5 @@ azure-data-engineering-project/
 2. Configure Linked Services in ADF
 3. Run ADF pipelines
 4. Execute Databricks notebooks (Bronze → Silver → Gold)
-
-
-(Added images inside a `/screenshots` folder)
-
 
 
